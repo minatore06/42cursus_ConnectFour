@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/15 15:44:44 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:56:01 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ typedef struct s_program
 }   t_program;
 
 int	check_input(int ac, char **av);
-void	take_input(t_program *data, int ac, char **av);
+void	take_input(t_program *data, char **av);
 
 #endif

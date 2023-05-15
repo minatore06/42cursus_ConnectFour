@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:45:03 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/15 15:44:40 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:58:46 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	check_input(int ac, char **av)
 		{
 			if (av[j][i] < '0' || av[j][i] > '9')
 				ret = 0;
+			i++;
 		}
+		j++;
 	}
 	if (ret != 1)
 	{
@@ -47,7 +49,7 @@ int	check_input(int ac, char **av)
 	return (1);
 }
 
-void	take_input(t_program *data, int ac, char **av)
+void	take_input(t_program *data, char **av)
 {
 	data->height = ft_atoi(av[1]);
 	data->width = ft_atoi(av[2]);
