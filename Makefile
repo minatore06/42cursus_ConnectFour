@@ -2,7 +2,7 @@ NAME = connect4.a
 
 OUT = connect4
 
-SRCS = 
+SRCS = main.c
 
 OBJS = ${SRCS:.c=.o}
 
