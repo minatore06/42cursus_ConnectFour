@@ -22,7 +22,15 @@ typedef struct s_program
     int win;
 }   t_program;
 
-int	check_input(int ac, char **av);
-void	take_input(t_program *data, char **av);
+int			check_input(int ac, char **av);
+void		take_input(t_program *data, char **av);
+
+int			is_playable(t_program p, int m);
+int			is_winning_move(t_program p, int m, int player);
+int			played_moves(t_program p);
+int 		get_height(t_program p, int m);
+
+t_program	p_copy(t_program p);
+void		p_free(t_program p);
 
 #endif

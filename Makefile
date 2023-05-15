@@ -2,7 +2,7 @@ NAME = connect4.a
 
 OUT = connect4
 
-SRCS = main.c take_input.c
+SRCS = main.c take_input.c ai.c check_positions.c utils.c
 
 OBJS = ${SRCS:.c=.o}
 
