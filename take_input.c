@@ -6,13 +6,13 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:45:03 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/15 15:36:31 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/05/15 15:44:40 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
 
-void	check_input(int ac, char **av)
+int	check_input(int ac, char **av)
 {
 	int i;
 	int j;
@@ -44,6 +44,7 @@ void	check_input(int ac, char **av)
 		ft_printf("Error: Invalid size\n");
 		return (0);
 	}
+	return (1);
 }
 
 void	take_input(t_program *data, int ac, char **av)
@@ -52,5 +53,5 @@ void	take_input(t_program *data, int ac, char **av)
 	data->width = ft_atoi(av[2]);
 	data->matrix = ft_calloc(sizeof(int *), (data->height + 1));
 	for (int i=0; i <= data->height; i++)
-		data->matrix[i] = (int *)malloc(sizeof(int) * (data->width +1));
+		data->matrix[i] = ft_calloc(sizeof(int), (data->width +1));
 }
