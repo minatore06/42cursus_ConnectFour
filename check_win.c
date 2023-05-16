@@ -110,9 +110,8 @@ int check_win(t_program p, int m, int pl)
         return (0);
     while(p.matrix[x][y] != pl)
         y++;
-    if(y != 0 && p.matrix[x][y - 1] != 0)
+    if (y != 0 && p.matrix[x][y - 1] != 0)
         return (-1);
-
     if (check_row (p, pl, x, y) || check_column(p, pl, x, y) || check_diagonal(p, pl, x, y))
         return (pl);
     return (0);
