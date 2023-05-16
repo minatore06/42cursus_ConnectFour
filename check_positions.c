@@ -72,7 +72,6 @@ int	check_one_dir(t_program p, int m, int player, int mod_i, int mod_j)
 int is_winning_move(t_program p, int m, int player)
 {
     int i, j;
-	int	is_win;
 
     i = get_height(p, m);
     j = m;

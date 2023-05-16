@@ -12,6 +12,15 @@
 
 #include "connect4.h"
 
+int	change_player(int player)
+{
+	if (player == 1)
+		return (2);
+	else if (player == 2)
+		return (1);
+	return (42);
+}
+
 int	get_best_score(t_program p, int player)
 {
 	int	bestScore;
@@ -27,15 +36,16 @@ int	get_best_score(t_program p, int player)
 	bestScore = -p.height * p.width;
 	for (int i = 0; i < p.width; i++)
 	{
-		if (player == 1)
-			player = 2;
-		else
-			player = 1;
-		p2 = p_copy(p);
-		p2.matrix[i][get_height(p2, i)] = player;
-		score = -get_best_score(p2, player);
-		if (score > bestScore) bestScore = score;
-		p_free(p2);
+		if (is_playable(p, i))
+		{
+			p2 = p_copy(p);
+			p2.matrix[i][get_height(p2, i)] = player;
+			player = change_player(player);
+			score = -get_best_score(p2, player);
+			if (score > bestScore) bestScore = score;
+			p_free(p2);
+			player = change_player(player);
+		}
 	}
 	return (bestScore);
 }
