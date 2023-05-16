@@ -42,4 +42,5 @@ t_program	p_copy(t_program p);
 void		p_free(t_program p);
 int	ft_random_start(t_program *prog);
 
+int check_win(t_program p, int m, int pl);
 #endif
