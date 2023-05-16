@@ -42,4 +42,6 @@ t_program	p_copy(t_program p);
 void		p_free(t_program p);
 int	ft_random_start(t_program *prog);
 
+void    ai_plays(t_program p, int player);
+
 #endif

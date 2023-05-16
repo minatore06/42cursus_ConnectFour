@@ -19,9 +19,9 @@ int get_height(t_program p, int m)
     for (i = p.height - 1; i >= 0; i--)
     {
         if (p.matrix[i][m] == 0)
-            break;
+            return (i);
     }
-    return (i);
+    return (-1);
 }
 
 int	is_playable(t_program p, int m)
@@ -29,7 +29,7 @@ int	is_playable(t_program p, int m)
 	int	i;
 
 	i = get_height(p, m);
-	if (!p.matrix[i][m])
+	if (i >= 0 && !p.matrix[i][m])
 		return (1);
 	return (0);
 }

@@ -28,9 +28,9 @@ int	main(int argc, char **argv)
 	ft_random_start(&data);
 	if (data.player == 2)
 	{
-		data.matrix[5][2] = 2;
+		data.matrix[data.height - 1][data.width / 2] = 2;
 	}
-	while (data.win != 1)
+	while (1)
 	{
 		ft_draw_grid_terminal(&data);
 		ft_printf("Insert n of column: ");
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 		column = ft_atoi(input);
 		ft_printf("\e[1;1H\e[2J");
 		ft_put(&data, column - 1);
-		free(input);
+		ai_plays(data, 2);
 	}
 	return (0);
 }

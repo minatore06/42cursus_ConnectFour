@@ -26,29 +26,24 @@ static int	ft_check_column_full(t_program *prog, int column)
 	for (int i = 0; i < prog->height; i++)
 	{
 		if (prog->matrix[i][column] == 0)
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_put(t_program *prog, int column)
 {
 	//check input value
-	if (ft_check_input_value(prog, column) == 0)
+	if (!ft_check_input_value(prog, column))
 	{
 		ft_printf("Invalid column, retry\n");
 		return (0);
 	}
 	//check colonna piena
-	if (ft_check_column_full(prog, column) == 1)
+	if (!ft_check_column_full(prog, column))
 	{
-		for (int i = 0; i < prog->height; i++)
-		{
-			if (prog->matrix[i + 1][column] != 0)
-				prog->matrix[i][column] = 1;
-			if (i == prog->height - 1 && prog->matrix[i][column] == 0)
-				prog->matrix[i][column] = 1;
-		}
+		if (is_playable(*prog, column))
+			prog->matrix[get_height(*prog, column)][column] = 1;
 	}
 	else
 		ft_printf("Colonna piena\n");
