@@ -20,6 +20,7 @@ typedef struct s_program
     int width;
     int **matrix;
     int win;
+    int turn;
 }   t_program;
 
 int			check_input(int ac, char **av);
