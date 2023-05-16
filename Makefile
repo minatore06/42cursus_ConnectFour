@@ -2,7 +2,7 @@ NAME = connect4.a
 
 OUT = connect4
 
-SRCS = main.c take_input.c ai.c check_positions.c utils.c
+SRCS = main.c draw_terminal.c take_input.c put.c utils.c random.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -15,7 +15,7 @@ FLAGS = -Wall -Werror -Wextra
 LIBFT = libft
 
 LIBFTNAME = libft.a
-	
+
 %.o: %.c
 	${CC} ${FLAGS} -g -c $< -o ${<:.c=.o}
 
@@ -31,11 +31,11 @@ bonus:	${OBJS}
 	mv ${LIBFT}/${LIBFTNAME} ${NAME}
 	${CC} ${FLAGS} ${OBJS} ${NAME} -o ${OUT}
 
-clean: 
+clean:
 	${RM} ${OBJS}
 	make clean -C ${LIBFT}
 
-fclean: clean 
+fclean: clean
 	${RM} ${NAME}
 	make fclean -C ${LIBFT}
 
