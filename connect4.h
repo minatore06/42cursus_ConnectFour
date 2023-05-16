@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/16 17:29:25 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:40:12 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdlib.h>
 # include <time.h>
 # include "minilibx-linux/mlx.h"
-
 
 typedef struct s_vector
 {
@@ -73,7 +72,9 @@ int 		get_height(t_program p, int m);
 
 t_program	p_copy(t_program p);
 void		p_free(t_program p);
+
 int    ft_gui_init(t_program *prog);
+int ft_check_input_string(char *str);
 int ft_draw(t_program *prog);
 int	ft_close(void *param);
 void	ft_free_all(t_program *program);

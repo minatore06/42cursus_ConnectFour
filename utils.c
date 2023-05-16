@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:09:41 by scaiazzo          #+#    #+#             */
-/*   Updated: 2023/05/16 17:28:29 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:39:40 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
+
+int ft_check_input_string(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return (0);
+        i++;
+    }
+    return (1);
+}
 
 t_program   p_copy(t_program p)
 {
@@ -28,7 +42,7 @@ t_program   p_copy(t_program p)
 		    p2.matrix[i][j] = p.matrix[i][j];
         }
     }
-    return (p2);    
+    return (p2);
 }
 
 void    p_free(t_program p)

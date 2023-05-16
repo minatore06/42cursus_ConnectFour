@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:49:29 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/16 17:25:39 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:42:05 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,18 @@ int	main(int argc, char **argv)
 		ft_draw_grid_terminal(&data);
 		ft_printf("Insert n of column: ");
 		input = get_next_line(0);
-		column = ft_atoi(input);
-		ft_printf("\e[1;1H\e[2J");
-		ft_put(&data, column - 1);
-		ai_plays(data, 2);
+		if (ft_check_input_string(input))
+		{
+			column = ft_atoi(input);
+			ft_printf("\e[1;1H\e[2J");
+			ft_put(&data, column - 1);
+			ai_plays(data, data.player);
+		}
+		else
+		{
+			ft_printf("\e[1;1H\e[2J");
+			ft_printf("Invalid number, retry\n");
+		}
 	}
 	return (0);
 }

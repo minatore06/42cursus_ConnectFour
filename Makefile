@@ -12,7 +12,7 @@ LINKS =  minilibx-linux/libmlx.a -lXext -lX11 -lm
 
 RM = rm -f
 
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra
 
 LIBFT = libft
 
