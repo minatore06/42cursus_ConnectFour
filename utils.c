@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scaiazzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:09:41 by scaiazzo          #+#    #+#             */
-/*   Updated: 2023/05/15 17:09:56 by scaiazzo         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:28:29 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,26 @@ void    p_free(t_program p)
     free(p.matrix);
 }
 
+int	ft_close(void *param)
+{
+	t_program	*program;
+
+	program = (t_program *)param;
+	ft_free_all(program);
+	exit(0);
+}
+
+void	ft_free_all(t_program *program)
+{
+	mlx_destroy_window(program->mlx, program->window);
+	mlx_destroy_display(program->mlx);
+	free(program->mlx);
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 int **dup_matrix(t_program p)
 {
     int     i;

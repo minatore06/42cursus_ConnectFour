@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/16 11:59:48 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:29:25 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,42 @@
 # define CONNECT4_H
 
 # include "libft/libft.h"
+# include <unistd.h>
 # include <stdlib.h>
 # include <time.h>
+# include "minilibx-linux/mlx.h"
+
+
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}   t_vector;
+
+typedef struct s_image {
+	void		*reference;
+	t_vector	size;
+	char		*pixels;
+	int			bits_per_pixel;
+	int			line_size;
+	int			endian;
+	char		*path;
+}	t_image;
 
 typedef struct s_program
 {
+    int player;
     int height;
     int width;
     int **matrix;
-    int win;
+    int     win;
+    void	*mlx;
+	void	*window;
     int turn;
-    int player;
+    t_image buffer;
+    t_image empthy;
+    t_image player_img;
+    t_image cpu;
 }   t_program;
 
 typedef struct  s_remember
@@ -48,6 +73,14 @@ int 		get_height(t_program p, int m);
 
 t_program	p_copy(t_program p);
 void		p_free(t_program p);
+int    ft_gui_init(t_program *prog);
+int ft_draw(t_program *prog);
+int	ft_close(void *param);
+void	ft_free_all(t_program *program);
+int     ft_input(int button, int x, int y, t_program *param);
+int     create_trgb(int t, int r, int g, int b);
+void	ft_mlx_pixel_put(t_program *prog, int x, int y, int color);
+void    ft_draw_grid(t_program *prog);
 int	        ft_random_start(t_program *prog);
 int 		**dup_matrix(t_program p);
 void		add_brain_front(t_remember **lst, t_remember *new);

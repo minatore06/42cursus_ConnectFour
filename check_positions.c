@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_positions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:38:46 by scaiazzo          #+#    #+#             */
-/*   Updated: 2023/05/16 11:28:55 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:21:49 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	check_one_dir(t_program p, int m, int player, int mod_i, int mod_j)
 int is_winning_move(t_program p, int m, int player)
 {
     int i, j;
+	int	is_win;
 
     i = get_height(p, m);
     j = m;
