@@ -27,6 +27,14 @@ typedef struct s_program
     int player;
 }   t_program;
 
+typedef struct  s_remember
+{
+    int		**matrix;
+    int		move;
+    int		score;
+    void	*next;
+}   t_remember;
+
 void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
 int			check_input(int ac, char **av);
@@ -41,6 +49,11 @@ int 		get_height(t_program p, int m);
 t_program	p_copy(t_program p);
 void		p_free(t_program p);
 int	        ft_random_start(t_program *prog);
+int 		**dup_matrix(t_program p);
+void		add_brain_front(t_remember **lst, t_remember *new);
+t_remember	*make_brain(t_program p, int m, int score);
+int 		already_explored(t_remember *brain, t_program p, int *score);
+int 		mat_cmp(t_program p, int **maty);
 
 void		ai_plays(t_program p, int player);
 

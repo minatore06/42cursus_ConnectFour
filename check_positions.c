@@ -52,21 +52,23 @@ int	played_moves(t_program p)
 
 int	check_one_dir(t_program p, int m, int player, int mod_i, int mod_j)
 {
+	int	i, j;
 	int	count;
 
 	count = 1;
-	for (int i = get_height(p, m) + mod_i; i < p.height && i >= 0; i+=mod_i)
+	i = get_height(p, m) + mod_i;
+	j = m + mod_j;
+	while ((i < p.height && i >= 0) && (j < p.width && j >= 0))
 	{
-		for (int j = m + mod_j; j < p.width && j >= 0; j+=mod_j)
-		{
-			if (p.matrix[i][j] != player)
-				return (0);
-			count++;
-			if (count == 4)
-				break;
-		}
+		if (p.matrix[i][j] != player)
+			return (0);
+		count++;
+		if (count == 4)
+			return (1);
+		i += mod_i;
+		j += mod_j;
 	}
-	return (1);
+	return (0);
 }
 
 int is_winning_move(t_program p, int m, int player)
