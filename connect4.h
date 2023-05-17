@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/16 17:40:12 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/17 10:11:42 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_image {
 
 typedef struct s_program
 {
+    int gui;
     int player;
     int height;
     int width;
@@ -62,7 +63,7 @@ typedef struct  s_remember
 void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
 int			check_input(int ac, char **av);
-void		take_input(t_program *data, char **av);
+void	take_input(t_program *data, char **av, int ac);
 int	        ft_put(t_program *prog, int column);
 
 int			is_playable(t_program p, int m);
