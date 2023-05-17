@@ -74,6 +74,7 @@ int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
 int **dup_matrix(t_program p)
 {
     int     i;
@@ -96,19 +97,41 @@ int **dup_matrix(t_program p)
 	return (maty);
 }
 
-void	add_brain_front(t_remember **lst, t_remember *new)
+t_remember  *last_brain(t_remember *lst)
 {
+    if (!lst)
+        return (lst);
+    while (lst->next)
+        lst = lst->next;
+    return (lst);
+}
+
+void    free_cell(t_remember *cell, int height)
+{
+    for (int i = 0; i <= height; i++)
+    {
+        free(cell->matrix[i]);
+    }
+    free(cell->matrix);
+    free(cell);
+}
+
+void	add_brain_front(t_remember **lst, t_remember *new, int height)
+{
+    if (new->id > 300000)
+        free_cell(last_brain(&lst), height);
 	new->next = *lst;
 	*lst = new;
 }
 
-t_remember	*make_brain(t_program p, int m, int score)
+t_remember	*make_brain(t_program p, int m, int score, int lastID)
 {
 	t_remember	*node;
 
 	node = malloc(sizeof(t_remember));
 	if (node)
 	{
+        node->id = lastID + 1;
         node->matrix = dup_matrix(p);
         node->move = m;
         node->score = score;
@@ -130,13 +153,14 @@ int mat_cmp(t_program p, int **maty)
     return (0);
 }
 
-int already_explored(t_remember *brain, t_program p, int *score)
+int already_explored(t_remember *brain, t_program p, int *score, int *move)
 {
     while (brain)
     {
         if (!mat_cmp(p, brain->matrix))
         {
             *score = brain->score;
+            *move = brain->move;
             return (1);
         }
         brain = brain->next;

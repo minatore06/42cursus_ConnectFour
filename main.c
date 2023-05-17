@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_program	data;
+	t_remember	brain;
 	char		*input;
 	int			column;
 
@@ -79,6 +80,11 @@ int	main(int argc, char **argv)
 		if (get_next_line(0))
 			ft_printf("\e[1;1H\e[2J");
 		ft_random_start(&data);
+		brain.matrix = dup_matrix(data);
+		brain.move = data.width / 2;
+		brain.score = 0;
+		brain.id = 0;
+		brain.next = NULL;
 		if (data.player == 2)
 		{
 			data.matrix[data.height - 1][data.width / 2] = 2;
@@ -93,7 +99,7 @@ int	main(int argc, char **argv)
 				column = ft_atoi(input);
 				ft_printf("\e[1;1H\e[2J");
 				ft_put(&data, column - 1);
-				// ai_plays(data, data.player);
+				ai_plays(data, data.player, brain);
 			}
 			else
 			{

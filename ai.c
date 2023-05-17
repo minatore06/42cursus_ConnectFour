@@ -48,8 +48,12 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 			return ((p.width * p.height + 1 - played_moves(p)) / 2 );
 		}
 	}
-	if (depth > 20)
-		return (0); 
+	if (already_explored(brain, p, &score, move))
+	{
+		return (score);
+	}
+/* 	if (depth > 20)
+		return ((p.width * p.height + 1 - played_moves(p)) / 2 );  */
 	max = (p.width * p.height - 1 - played_moves(p)) / 2;
 	if (beta > max)
 	{
@@ -65,16 +69,18 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 			p2 = p_copy(p);
 			p2.matrix[get_height(p2, order[i])][order[i]] = player;
 			player = change_player(player);
-			if (!already_explored(brain, p2, &score))
-			{
-				score = -get_best_score(p2, player, &tmp, -beta, -alpha, depth + 1, order, brain);
-				//ft_printf("Calcolo incredibile%d\n",score);
-				add_brain_front(&brain, make_brain(p2, i, score));
-			}
+			score = -get_best_score(p2, player, &tmp, -beta, -alpha, depth + 1, order, brain);
+			//ft_printf("Calcolo incredibile%d\n",score);
 			if (score >= beta)
+			{
+				*move = i;
 				return (score);
+			}
 			if (score > alpha)
+			{
+				*move = i;
 				alpha = score;
+			}
 /* 			if (score > bestScore)
 			{
 				//ft_printf("Cambiamento nell'universo%d | %d\n",score, i);
@@ -85,21 +91,42 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 			player = change_player(player);
 		}
 	}
+	add_brain_front(&brain, make_brain(p, *move, alpha, brain->id), p.height);
 	return (alpha);
 }
 
-void    ai_plays(t_program p, int player)
+int	epic_solver(t_program p, int player, t_remember brain)
 {
-	int			move;
 	int			order[p.width];
-	t_remember	brain;
+	int			min, max;
+	int			med;
+	int			score;
+	int			move;
 
-	brain.matrix = dup_matrix(p);
-	brain.move = p.width / 2;
-	brain.score = 0;
-	brain.next = NULL;
 	for(int i = 0; i < p.width; i++)
         order[i] = p.width / 2 + (1 - 2 * (i % 2)) * (i + 1) / 2;
-    get_best_score(p, player, &move, -3, 3, 0, order, &brain);
+	min = -(p.width * p.height - played_moves(p)) / 2;
+	max = (p.width * p.height + 1 - played_moves(p)) / 2;
+	while (min < max)
+	{
+		med = min + (max - min) / 2;
+		if (med <= 0 && min / 2 < med)
+			med = min / 2;
+		else if (med >= 0 && max / 2 > med)
+			med = max / 2;
+    	score = get_best_score(p, player, &move, med, med + 1, 0, order, &brain);
+		if (score <= med)
+			max = score;
+		else
+			min = score;
+	}
+	return (move);
+}
+
+void    ai_plays(t_program p, int player, t_remember brain)
+{
+	int			move;
+
+	move = epic_solver(p, player, brain);
 	ai_play_move(p, move);
 }
