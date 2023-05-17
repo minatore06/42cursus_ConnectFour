@@ -34,11 +34,17 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 	int	max;
 	int	score;
 	int	tmp;
+	static int	reset = 0;
 	t_program p2;
-	
+
 	if (played_moves(p) == p.height * p.width)
 		return (0);
-
+	if (reset)
+	{
+		for(int i = 0; i < p.width; i++)
+        	order[i] = p.width / 2 + (1 - 2 * (i % 2)) * (i + 1) / 2;
+		reset = 0;
+	}
 	for (int m = 0; m < p.width; m++)
 	{
 		if (is_playable(p, m) && is_winning_move(p, m, player))
@@ -48,12 +54,35 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 			return ((p.width * p.height + 1 - played_moves(p)) / 2 );
 		}
 	}
-	if (already_explored(brain, p, &score, move))
+	for (int m = 0; m < p.width; m++)
 	{
-		return (score);
+		if (is_playable(p, m) && is_winning_move(p, m, change_player(player)))
+		{
+			*move = m;
+			//ft_printf("Qualcun altro vincera'%d | %d\n",(p.width * p.height + 1 - played_moves(p)) / 2, m);
+			return ((p.width * p.height + 1 - played_moves(p)) / 2 );
+		}
 	}
-/* 	if (depth > 20)
-		return ((p.width * p.height + 1 - played_moves(p)) / 2 );  */
+ 	for (int m = 0; m < p.width; m++)
+	{
+		if (is_playable(p, order[m]))
+		{
+			max = get_height(p, order[m]);
+			p.matrix[max][order[m]] = player;
+			tmp = order[m];
+			if (is_playable(p, order[m]) && is_winning_move(p, order[m], change_player(player)))
+			{
+				//ft_printf("Non giocare questo %d\n",order[m]);
+				reset = 1;
+				order[m] = -1;
+			}
+			p.matrix[max][tmp] = 0;
+		}
+	}
+	if (already_explored(brain, p, &score, move))
+		return (score);
+/*  	if (depth > 15)
+		return ((p.width * p.height + 1 - played_moves(p)) / 2 ); */
 	max = (p.width * p.height - 1 - played_moves(p)) / 2;
 	if (beta > max)
 	{
@@ -64,6 +93,8 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 	//ft_printf("sos%d\n",depth);
 	for (int i = 0; i < p.width; i++)
 	{
+		if (order[i] == -1)
+			continue ;
 		if (is_playable(p, order[i]))
 		{
 			p2 = p_copy(p);
@@ -123,10 +154,39 @@ int	epic_solver(t_program p, int player, t_remember brain)
 	return (move);
 }
 
+void	easy_put(t_program p, int player)
+{
+	for (int m = 0; m < p.width; m++)
+	{
+		if (is_playable(p, m) && is_winning_move(p, m, player))
+		{
+			ai_play_move(p, m);
+			return ;
+		}
+	}
+	for (int m = 0; m < p.width; m++)
+	{
+		if (is_playable(p, m) && is_winning_move(p, m, change_player(player)))
+		{
+			ai_play_move(p, m);
+			return ;
+		}
+	}
+	if (is_playable(p, p.width / 2))
+		ai_play_move(p, p.width / 2);
+	else if (is_playable(p, p.width / 2 - 1))
+		ai_play_move(p, p.width / 2 - 1);
+}
+
 void    ai_plays(t_program p, int player, t_remember brain)
 {
 	int			move;
 
-	move = epic_solver(p, player, brain);
-	ai_play_move(p, move);
+	if (played_moves(p) / 2 < 2)
+		easy_put(p, player);
+	else
+	{
+		move = epic_solver(p, player, brain);
+		ai_play_move(p, move);
+	}
 }

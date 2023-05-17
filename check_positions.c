@@ -61,14 +61,14 @@ int	check_one_dir(t_program p, int m, int player, int mod_i, int mod_j)
 	while ((i < p.height && i >= 0) && (j < p.width && j >= 0))
 	{
 		if (p.matrix[i][j] != player)
-			return (0);
+			return (count);
 		count++;
 		if (count == 4)
-			return (1);
+			return (count);
 		i += mod_i;
 		j += mod_j;
 	}
-	return (0);
+	return (count);
 }
 
 int is_winning_move(t_program p, int m, int player)
@@ -78,14 +78,10 @@ int is_winning_move(t_program p, int m, int player)
 
     i = get_height(p, m);
     j = m;
-	if (check_one_dir(p, m, player, -1, 0) ||
-		check_one_dir(p, m, player, -1, 1) ||
-		check_one_dir(p, m, player, 0, 1) ||
-		check_one_dir(p, m, player, 1, 1) ||
-		check_one_dir(p, m, player, 1, 0) ||
-		check_one_dir(p, m, player, 1, -1) ||
-		check_one_dir(p, m, player, 0, -1) ||
-		check_one_dir(p, m, player, -1, -1))
+	if (check_one_dir(p, m, player, -1, 0) + check_one_dir(p, m, player, 1, 0) >= 4 ||
+		check_one_dir(p, m, player, -1, 1) + check_one_dir(p, m, player, 1, -1) >= 4 ||
+		check_one_dir(p, m, player, 0, 1) + check_one_dir(p, m, player, 0, -1) >= 4 ||
+		check_one_dir(p, m, player, 1, 1) + check_one_dir(p, m, player, -1, -1) >= 4)
 		return (1);
     return (0);
 }

@@ -98,8 +98,8 @@ int	main(int argc, char **argv)
 			{
 				column = ft_atoi(input);
 				ft_printf("\e[1;1H\e[2J");
-				ft_put(&data, column - 1);
-				ai_plays(data, data.player, brain);
+				if (ft_put(&data, column - 1))
+					ai_plays(data, data.player, brain);
 			}
 			else
 			{
