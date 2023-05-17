@@ -6,7 +6,7 @@
 /*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:09:36 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/16 17:30:31 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 11:27:03 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void    ft_draw_grid(t_program *prog)
 {
     for(int i = 0; i < prog->height; i++)
     {
-        for(int j = 1; j < prog->width + 1; j++)
+        for(int j = 0; j < prog->width + 1; j++)
         {
             if(prog->matrix[i][j] == 0)
-                mlx_put_image_to_window(prog->mlx, prog->window, prog->empthy.reference, i * 64, j *64);
+                mlx_put_image_to_window(prog->mlx, prog->window, prog->empthy.reference, j * 64, (i+1) *64);
             else if(prog->matrix[i][j] == 1)
-                mlx_put_image_to_window(prog->mlx, prog->window, prog->player_img.reference, i * 64, j *64);
+                mlx_put_image_to_window(prog->mlx, prog->window, prog->player_img.reference, j * 64, (i+1) *64);
             else if(prog->matrix[i][j] == 2)
-                mlx_put_image_to_window(prog->mlx, prog->window, prog->cpu.reference, i * 64, j *64);
+                mlx_put_image_to_window(prog->mlx, prog->window, prog->cpu.reference, j * 64, (i+1) *64);
         }
     }
 }

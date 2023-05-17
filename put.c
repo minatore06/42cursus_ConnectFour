@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:18:41 by kristori          #+#    #+#             */
-/*   Updated: 2023/05/16 11:01:38 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:03:49 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ int	ft_put(t_program *prog, int column)
 			prog->matrix[get_height(*prog, column)][column] = 1;
 	}
 	else
+	{
 		ft_printf("Colonna piena\n");
+		return 0;
+	}
 	return (1);
 }

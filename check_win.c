@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:29:54 by fracerba          #+#    #+#             */
-/*   Updated: 2023/05/16 11:50:51 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/17 11:48:55 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int check_win(t_program p, int m, int pl)
 
     x = m;
     y = 0;
-    if (p.turn < 7)
-        return (0);
+    // if (p.turn < 7)
+    //     return (0);
     while(p.matrix[x][y] != pl)
         y++;
     if (y != 0 && p.matrix[x][y - 1] != 0)
