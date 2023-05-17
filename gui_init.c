@@ -6,7 +6,7 @@
 /*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:40:34 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 11:23:42 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:24:30 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int    ft_gui_init(t_program *prog)
     prog->buffer = ft_new_image(prog->mlx, prog->width * 64, (prog->height) * 64);
     prog->player_img = load_sprite(*prog, "sprite/Red+Bg64x64.xpm");
     prog->empthy = load_sprite(*prog, "sprite/Bg64x64.xpm");
-    prog->cpu = load_sprite(*prog, "sprite/Blue+Bg64x64.xpm");
+    prog->cpu = load_sprite(*prog, "sprite/Yellow+Bg64x64.xpm");
+    prog->fiche = load_sprite(*prog, "sprite/RedOnly.xpm");
     // ft_draw(prog);
     // mlx_put_image_to_window(prog->mlx, prog->window, prog->buffer.reference, 0, 0);
     return 0;

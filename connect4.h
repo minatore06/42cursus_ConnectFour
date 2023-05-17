@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 10:11:42 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/17 12:50:28 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_program
     t_image empthy;
     t_image player_img;
     t_image cpu;
+    t_image fiche;
 }   t_program;
 
 typedef struct  s_remember
@@ -95,4 +96,6 @@ int 		mat_cmp(t_program p, int **maty);
 void		ai_plays(t_program p, int player, t_remember brain);
 
 int			check_win(t_program p, int m, int pl);
+int         ft_mouse_move(int x, int y, void *param);
+
 #endif

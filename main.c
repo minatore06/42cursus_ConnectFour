@@ -6,7 +6,7 @@
 /*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:49:29 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 12:02:32 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 15:23:10 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 		ft_gui_init(&data);
 	    ft_draw_grid(&data);
 		mlx_mouse_hook(data.window, ft_input, &data);
+		mlx_hook(data.window, 6 , (1L<<6), ft_mouse_move, &data);
 		mlx_hook(data.window, 17, 0, ft_close, &data);
 		mlx_loop(data.mlx);
 	}
@@ -99,7 +100,7 @@ int	main(int argc, char **argv)
 				column = ft_atoi(input);
 				ft_printf("\e[1;1H\e[2J");
 				ft_put(&data, column - 1);
-				ai_plays(data, data.player, brain);
+				// ai_plays(data, data.player);
 			}
 			else
 			{
