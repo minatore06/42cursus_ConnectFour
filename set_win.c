@@ -1,48 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_win.c                                        :+:      :+:    :+:   */
+/*   set_win.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fracerba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:29:54 by fracerba          #+#    #+#             */
-/*   Updated: 2023/05/17 11:48:55 by javellis         ###   ########.fr       */
+/*   Created: 2023/05/17 16:35:56 by fracerba          #+#    #+#             */
+/*   Updated: 2023/05/17 16:36:00 by fracerba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
 
-int check_column(t_program p, int pl, int x, int y)
+void set_col(t_program p, int pl, int x, int y)
 {
     int i;
-    int count;
 
-    count = 1;
     i = 1;
+    p.matrix[x][y] = pl + 2;
     while (i < 4 && (x + i) >= 0 && (x + i) < p.height)
     {
         if (p.matrix[x + i][y] == pl)
-            count++;
+            p.matrix[x + i][y] = pl + 2;
         else
             break;
         i++;
     }
-    if (count >= 4)
-        return (1);
-    return (0);
 }
 
-int check_row(t_program p, int pl, int x, int y)
+void set_row(t_program p, int pl, int x, int y)
 {
     int i;
-    int count;
 
     i = -1;
-    count = 1;
+    p.matrix[x][y] = pl + 2;
     while (i > -4 && (y + i) >= 0 && (y + i) < p.width)
     {
         if (p.matrix[x][y + i] == pl)
-            count++;
+            p.matrix[x][y + i] = pl + 2;
         else
             break;
         i--;
@@ -51,27 +46,23 @@ int check_row(t_program p, int pl, int x, int y)
     while (i < 4 && (y + i) >= 0 && (y + i) < p.width)
     {
         if (p.matrix[x][y + i] == pl)
-            count++;
+            p.matrix[x][y + i] = pl + 2;
         else
             break;
         i++;
     }
-    if (count >= 4)
-        return (1);
-    return (0);
 }
 
-int check_diagonal1(t_program p, int pl, int x, int y)
+void set_diag1(t_program p, int pl, int x, int y)
 {
     int i;
-    int count;
 
     i = -1;
-    count = 1;
+    p.matrix[x][y] = pl + 2;
     while (i > -4  && (x + i) >= 0 && (x + i) < p.height && (y + i) >= 0 && (y + i) < p.width)
     {
         if (p.matrix[x + i][y + i] == pl)
-            count++;
+            p.matrix[x + i][y + i] = pl + 2;
         else
             break;
         i--;
@@ -80,29 +71,25 @@ int check_diagonal1(t_program p, int pl, int x, int y)
     while (i < 4  && (x + i) >= 0 && (x + i) < p.height && (y + i) >= 0 && (y + i) < p.width)
     {
         if (p.matrix[x + i][y + i] == pl)
-            count++;
+            p.matrix[x + i][y + i] = pl + 2;
         else
             break;
         i++;
     }
-    if (count >= 4)
-        return (1);
-    return (0);
 }
 
-int check_diagonal2(t_program p, int pl, int x, int y)
+void set_diag2(t_program p, int pl, int x, int y)
 {
     int i;
     int j;
-    int count;
 
     i = -1;
     j = 1;
-    count = 1;
+    p.matrix[x][y] = pl + 2;
     while (i > -4 && j < 4 && (x + i) >= 0 && (x + i) < p.height && (y + j) >= 0 && (y + j) < p.width)
     {
         if (p.matrix[x + i][y + j] == pl)
-            count++;
+            p.matrix[x + i][y + j] = pl + 2;
         else
             break;
         i--;
@@ -113,55 +100,10 @@ int check_diagonal2(t_program p, int pl, int x, int y)
     while (i < 4 && j > -4 && (x + i) >= 0 && (x + i) < p.height && (y + j) >= 0 && (y + j) < p.width)
     {
         if (p.matrix[x + i][y + j] == pl)
-            count++;
+            p.matrix[x + i][y + j] = pl + 2;
         else
             break;
         i++;
         j--;
     }
-    if (count >= 4)
-        return (1);
-    return (0);
-}
-
-int check_win(t_program p, int m, int pl)
-{
-    int     x;
-    int     y;
-    int     z;
-   
-    if (p.turn < 7)
-        return (0);
-    x = 0;
-    y = m;
-    while(x < p.height)
-    {
-        if(p.matrix[x][y] == pl)
-            break;
-        x++;
-    }
-    if (x != 0 && p.matrix[x - 1][y] != 0 || x == p.height)
-        return (-1);
-    z = 0;
-    if (check_row(p, pl, x, y))
-    {
-        set_row(p, pl, x, y);
-        z = pl;
-    }
-    if (check_column(p, pl, x, y))
-    {
-        set_col(p, pl, x, y);
-        z = pl;
-    }
-    if (check_diagonal1(p, pl, x, y))
-    {
-        set_diag1(p, pl, x, y);
-        z = pl;
-    }
-    if (check_diagonal2(p, pl, x, y))
-    {
-        set_diag2(p, pl, x, y);
-        z = pl;
-    }
-    return (z);
 }
