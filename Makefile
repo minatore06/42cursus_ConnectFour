@@ -2,7 +2,7 @@ NAME = connect4.a
 
 OUT = connect4
 
-SRCS = main.c draw_terminal.c take_input.c put.c utils.c random.c ai.c check_positions.c gui_init.c hooks.c draw.c check_win.c
+SRCS = main.c draw_terminal.c take_input.c put.c utils.c random.c ai.c check_positions.c gui_init.c hooks.c draw.c check_win.c set_win.c
 
 OBJS = ${SRCS:.c=.o}
 

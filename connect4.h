@@ -95,6 +95,11 @@ int 		mat_cmp(t_program p, int **maty);
 
 void		ai_plays(t_program p, int player, t_remember brain);
 
+void set_col(t_program p, int pl, int x, int y);
+void set_row(t_program p, int pl, int x, int y);
+void set_diag1(t_program p, int pl, int x, int y);
+void set_diag2(t_program p, int pl, int x, int y);
+
 int			check_win(t_program p, int m, int pl);
 int         ft_mouse_move(int x, int y, void *param);
 

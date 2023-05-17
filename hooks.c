@@ -24,15 +24,18 @@ int ft_input(int button, int x, int y, t_program *param)
             ft_draw_grid(prog);
             ft_printf("\e[1;1H\e[2J");
             ft_draw_grid_terminal(prog);
-            // if(check_win(*prog, x / 64, prog->player) == prog->player)
+            if(check_win(*prog, x / 64, 1) == 1)
+            {
+                printf("hai vinto!\n");
+                return 0;
+            }
+            // ai_plays(*prog, prog->player);
+            // if(check_win(*prog, x / 64, 2) == 2)
             // {
-            //     printf("hai vinto!\n");
+            //     printf("hai perso!\n");
             //     return 0;
             // }
-            // ai_plays(*prog, prog->player);
         }
-        // ft_draw(prog);
-        // mlx_put_image_to_window(prog->mlx, prog->window, prog->buffer.reference, 0, 0);
     }
     return 1;
 }
@@ -43,4 +46,5 @@ int ft_mouse_move(int x, int y, void *param)
     mlx_clear_window(prog->mlx, prog->window);
     ft_draw_grid(prog);
     mlx_put_image_to_window(prog->mlx, prog->window, prog->fiche.reference, x - 32, 0);
+    return (1);
 }

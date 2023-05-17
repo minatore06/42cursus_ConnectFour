@@ -119,7 +119,7 @@ void    free_cell(t_remember *cell, int height)
 void	add_brain_front(t_remember **lst, t_remember *new, int height)
 {
     if (new->id > 300000)
-        free_cell(last_brain(&lst), height);
+        free_cell(last_brain(*lst), height);
 	new->next = *lst;
 	*lst = new;
 }
