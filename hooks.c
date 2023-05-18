@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:41:35 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 17:45:14 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:23:49 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,20 @@ int ft_input(int button, int x, int y, t_program *param)
             {
                 ft_printf("\e[1;1H\e[2J");
                 ft_draw_grid_terminal(prog);
-                ft_printf("hai vinto!\n");
+                ft_draw_win_terminal();
                 return (0);
             }
             int ai_move = ai_plays(*prog, prog->player, *(prog->remember));
+			ft_printf("\e[1;1H\e[2J");
+            ft_draw_grid_terminal(prog);
             if(check_win(*prog, ai_move, 2) == 2)
             {
                 ft_printf("\e[1;1H\e[2J");
                 ft_draw_grid_terminal(prog);
-                ft_printf("hai perso!\n");
+                ft_draw_lose_terminal();
                 return (0);
             }
+            prog->turn++;
         }
     }
     return 1;

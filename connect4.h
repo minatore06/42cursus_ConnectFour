@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 17:44:03 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:11:24 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_program
 
 void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
+void	ft_draw_win_terminal(void);
+void	ft_draw_lose_terminal(void);
 int			check_input(int ac, char **av);
 void	    take_input(t_program *data, char **av, int ac);
 int	        ft_put(t_program *prog, int column);

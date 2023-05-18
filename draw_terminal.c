@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:45:01 by kristori          #+#    #+#             */
-/*   Updated: 2023/05/17 17:41:46 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:11:25 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_draw_grid_terminal(t_program *prog)
 	int	i;
 	int	j;
 
+
+	ft_printf("Turn N: %d\n", prog->turn);
 	for (i = 0; i < prog->width; i++)
 		ft_printf("=====");
 	ft_printf("\n");
@@ -71,6 +73,32 @@ void	ft_draw_grid_terminal(t_program *prog)
 		else
 			ft_printf("| %d |", i);
 	}
+	ft_printf("\n");
+}
+
+void	ft_draw_win_terminal(void)
+{
+	ft_printf("\n");
+	ft_printf("\033[0;32m");
+	ft_printf("██    ██  ██████  ██    ██     ██     ██ ██ ███    ██\n"
+			  " ██  ██  ██    ██ ██    ██     ██     ██ ██ ████   ██\n"
+			  "  ████   ██    ██ ██    ██     ██  █  ██ ██ ██ ██  ██\n"
+			  "   ██    ██    ██ ██    ██     ██ ███ ██ ██ ██  ██ ██\n"
+			  "   ██     ██████   ██████       ███ ███  ██ ██   ████\n");
+	ft_printf("\033[0m");
+	ft_printf("\n");
+};
+
+void	ft_draw_lose_terminal(void)
+{
+	ft_printf("\n");
+	ft_printf("\033[1;31m");
+	ft_printf("██    ██  ██████  ██    ██     ██       ██████  ███████ ███████\n"
+			  " ██  ██  ██    ██ ██    ██     ██      ██    ██ ██      ██      \n"
+			  "  ████   ██    ██ ██    ██     ██      ██    ██ ███████ █████   \n"
+			  "   ██    ██    ██ ██    ██     ██      ██    ██      ██ ██      \n"
+			  "   ██     ██████   ██████      ███████  ██████  ███████ ███████\n");
+	ft_printf("\033[0m");
 	ft_printf("\n");
 }
 

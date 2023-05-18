@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:45:03 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/16 18:00:54 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:43:11 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	take_input(t_program *data, char **av, int ac)
 	data->height = ft_atoi(av[1]);
 	data->width = ft_atoi(av[2]);
 	data->gui = 0;
+	data->turn = 1;
 	if (ac == 4)
 	{
 		if (!ft_strncmp(av[3], "-gui", 4))

@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:49:29 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 18:06:04 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:23:15 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	main(int argc, char **argv)
 		brain.next = NULL;
 		data.remember = &brain;
 		ft_gui_init(&data);
-	    ft_draw_grid(&data);
+		ft_draw_grid(&data);
+		ft_printf("\e[1;1H\e[2J");
+		ft_draw_grid_terminal(&data);
 		mlx_mouse_hook(data.window, ft_input, &data);
 		mlx_hook(data.window, 6 , (1L<<6), ft_mouse_move, &data);
 		mlx_hook(data.window, 17, 0, ft_close, &data);
@@ -72,15 +74,17 @@ int	main(int argc, char **argv)
 					if(check_win(data, column - 1, 1) == 1)
 					{
 						ft_draw_grid_terminal(&data);
-						ft_printf("hai vinto!\n");
+						ft_draw_win_terminal();
 						return (0);
 					}
 					int ai_move = ai_plays(data, data.player, brain);
+					ft_printf("\e[1;1H\e[2J");
+					ft_draw_grid_terminal(&data);
 					ft_printf("ai_move: %d\n", ai_move);
 					if(check_win(data, ai_move, 2) == 2)
 					{
 						ft_draw_grid_terminal(&data);
-						ft_printf("hai perso!\n");
+						ft_draw_lose_terminal();
 						return (0);
 					}
 				}
