@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:09:41 by scaiazzo          #+#    #+#             */
-/*   Updated: 2023/05/16 17:39:40 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:52:37 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,28 @@ int **dup_matrix(t_program p)
 	return (maty);
 }
 
-void	free_matrix(int **mat)
+void	free_matrix(int **mat, t_program *data, int k)
 {
     int     i;
 
     if (!mat)
         return ;
     i = 0;
-    while(mat[i])
+    if (k == 1)
     {
-		free(mat[i]);
-        i++;
+        while(i < data->height)
+        {
+            free(mat[i]);
+            i++;
+        }
+    }
+    if (k == 2)
+    {
+        while(i <= data->height)
+        {
+            free(mat[i]);
+            i++;
+        }
     }
 	free(mat);
 }

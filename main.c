@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:49:29 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/18 11:23:15 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:04:36 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "connect4.h"
+
+void	free_all(t_remember *brain, t_program *data)
+{
+	t_remember *tmp;
+
+	while (brain->next)
+	{
+		free_matrix(brain->matrix, data, 1);
+		tmp = brain;
+		brain = brain->next;
+		free(tmp);
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -18,6 +31,7 @@ int	main(int argc, char **argv)
 	t_remember	brain;
 	char		*input;
 	int			column;
+	char		*gnl;
 
 	if (!check_input(argc, argv))
 		return (0);
@@ -48,8 +62,12 @@ int	main(int argc, char **argv)
 	{
 		ft_printf("\e[1;1H\e[2J");
 		ft_draw_start_terminal(&data);
-		if (get_next_line(0))
+		gnl = get_next_line(0);
+		if (gnl)
+		{
 			ft_printf("\e[1;1H\e[2J");
+			free(gnl);
+		}
 		ft_random_start(&data);
 		brain.matrix = dup_matrix(data);
 		brain.move = data.width / 2;
@@ -66,6 +84,7 @@ int	main(int argc, char **argv)
 			if (ft_check_input_string(input))
 			{
 				column = ft_atoi(input);
+				free(input);
 				ft_printf("\e[1;1H\e[2J");
 				if (ft_put(&data, column - 1))
 				{
@@ -73,7 +92,7 @@ int	main(int argc, char **argv)
 					{
 						ft_draw_grid_terminal(&data);
 						ft_draw_win_terminal();
-						return (0);
+						break ;
 					}
 					int ai_move = ai_plays(data, 2, brain);
 					ft_printf("\e[1;1H\e[2J");
@@ -83,7 +102,7 @@ int	main(int argc, char **argv)
 					{
 						ft_draw_grid_terminal(&data);
 						ft_draw_lose_terminal();
-						return (0);
+						break ;
 					}
 				}
 			}
@@ -94,5 +113,8 @@ int	main(int argc, char **argv)
 			}
 		}
 	}
+	free_all(&brain, &data);
+	free_matrix(brain.matrix, &data, 1);
+	free_matrix(data.matrix, &data, 2);
 	return (0);
 }

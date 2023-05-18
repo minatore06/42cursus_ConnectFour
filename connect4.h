@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/18 11:11:24 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:51:16 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void    	ft_draw_grid(t_program *prog);
 
 int	        ft_random_start(t_program *prog);
 int 		**dup_matrix(t_program p);
-void	    free_matrix(int **mat);
+void	    free_matrix(int **mat, t_program *data, int k);
 void		add_brain_front(t_remember **lst, t_remember *new, int height);
 t_remember	*make_brain(t_program p, int m, int score, int lastID);
 int 		already_explored(t_remember *brain, t_program p, int *score, int *move);
