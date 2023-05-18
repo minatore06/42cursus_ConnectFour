@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:29:54 by fracerba          #+#    #+#             */
-/*   Updated: 2023/05/17 17:30:06 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:10:38 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,8 @@ int check_win_ai(t_program p, int m, int pl, int verbose)
     int     x;
     int     y;
 
-    if (p.turn < 7 && verbose)
+    (void)verbose;
+    if (played_moves(p) < 7)
         return (0);
     x = 0;
     y = m;
