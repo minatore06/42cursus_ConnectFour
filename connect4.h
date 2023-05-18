@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/18 11:11:24 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:13:37 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ int         check_win_ai(t_program p, int m, int pl, int verbose);
 int         check_draw(t_program p, int m, int pl);
 
 int         ft_mouse_move(int x, int y, void *param);
+int         ft_esc(int keycode, void *param);
 
 #endif
