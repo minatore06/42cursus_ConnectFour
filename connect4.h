@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   connect4.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 12:50:28 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:44:03 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef struct s_image {
 	char		*path;
 }	t_image;
 
+typedef struct  s_remember
+{
+    int     id;
+    int		**matrix;
+    int		move;
+    int		score;
+    void	*next;
+}   t_remember;
+
 typedef struct s_program
 {
     int gui;
@@ -50,17 +59,12 @@ typedef struct s_program
     t_image empthy;
     t_image player_img;
     t_image cpu;
+    t_image player_win;
+    t_image cpu_win;
     t_image fiche;
+    t_remember *remember;
 }   t_program;
 
-typedef struct  s_remember
-{
-    int     id;
-    int		**matrix;
-    int		move;
-    int		score;
-    void	*next;
-}   t_remember;
 
 void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
@@ -93,7 +97,7 @@ t_remember	*make_brain(t_program p, int m, int score, int lastID);
 int 		already_explored(t_remember *brain, t_program p, int *score, int *move);
 int 		mat_cmp(t_program p, int **maty);
 
-void		ai_plays(t_program p, int player, t_remember brain);
+int    ai_plays(t_program p, int player, t_remember brain);
 
 void set_col(t_program p, int pl, int x, int y);
 void set_row(t_program p, int pl, int x, int y);

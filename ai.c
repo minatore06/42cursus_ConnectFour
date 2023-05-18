@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ai.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: scaiazzo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 16:30:38 by scaiazzo          #+#    #+#             */
-/*   Updated: 2023/05/15 16:30:40 by scaiazzo         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:43:52 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ void	easy_put(t_program p, int player)
 		ai_play_move(p, p.width / 2 - 1);
 }
 
-void    ai_plays(t_program p, int player, t_remember brain)
+int    ai_plays(t_program p, int player, t_remember brain)
 {
 	int			move;
 
@@ -189,4 +189,5 @@ void    ai_plays(t_program p, int player, t_remember brain)
 		move = epic_solver(p, player, brain);
 		ai_play_move(p, move);
 	}
+	return (move);
 }

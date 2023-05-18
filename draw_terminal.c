@@ -6,7 +6,7 @@
 /*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:45:01 by kristori          #+#    #+#             */
-/*   Updated: 2023/05/16 12:18:52 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:41:46 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_draw_grid_terminal(t_program *prog)
 			{
 				ft_printf("| ");
 				ft_printf("\033[1;31m");
-				ft_printf("O", prog->matrix[i][j]);
+				ft_printf("●", prog->matrix[i][j]);
 				ft_printf("\033[0m");
 				ft_printf(" |");
 			}
@@ -38,7 +38,23 @@ void	ft_draw_grid_terminal(t_program *prog)
 			{
 				ft_printf("| ");
 				ft_printf("\033[1;33m");
-				ft_printf("O", prog->matrix[i][j]);
+				ft_printf("●", prog->matrix[i][j]);
+				ft_printf("\033[0m");
+				ft_printf(" |");
+			}
+			else if (prog->matrix[i][j] == 3)
+			{
+				ft_printf("| ");
+				ft_printf("\033[1;31m");
+				ft_printf("✘", prog->matrix[i][j]);
+				ft_printf("\033[0m");
+				ft_printf(" |");
+			}
+			else if (prog->matrix[i][j] == 4)
+			{
+				ft_printf("| ");
+				ft_printf("\033[1;33m");
+				ft_printf("✘", prog->matrix[i][j]);
 				ft_printf("\033[0m");
 				ft_printf(" |");
 			}

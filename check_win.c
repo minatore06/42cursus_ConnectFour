@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_win.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:29:54 by fracerba          #+#    #+#             */
-/*   Updated: 2023/05/17 11:48:55 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:30:06 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int check_diagonal2(t_program p, int pl, int x, int y)
         j++;
     }
     i = 1;
-    j = -1; 
+    j = -1;
     while (i < 4 && j > -4 && (x + i) >= 0 && (x + i) < p.height && (y + j) >= 0 && (y + j) < p.width)
     {
         if (p.matrix[x + i][y + j] == pl)
@@ -129,9 +129,9 @@ int check_win(t_program p, int m, int pl)
     int     x;
     int     y;
     int     z;
-   
-    if (p.turn < 7)
-        return (0);
+
+    // if (p.turn < 7)
+    //     return (0);
     x = 0;
     y = m;
     while(x < p.height)

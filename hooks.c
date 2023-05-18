@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:41:35 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 15:25:49 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:45:14 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int ft_input(int button, int x, int y, t_program *param)
             ft_draw_grid_terminal(prog);
             if(check_win(*prog, x / 64, 1) == 1)
             {
-                printf("hai vinto!\n");
-                return 0;
+                ft_printf("hai vinto!\n");
+                return (0);
             }
-            // ai_plays(*prog, prog->player);
-            // if(check_win(*prog, x / 64, 2) == 2)
-            // {
-            //     printf("hai perso!\n");
-            //     return 0;
-            // }
+            int ai_move = ai_plays(*prog, prog->player, *(prog->remember));
+            if(check_win(*prog, ai_move, 2) == 2)
+            {
+                ft_printf("hai perso!\n");
+                return (0);
+            }
         }
     }
     return 1;

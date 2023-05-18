@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 14:49:29 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/17 15:23:10 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:06:04 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,6 @@ int	main(int argc, char **argv)
 
 	if (!check_input(argc, argv))
 		return (0);
-// ------------
-// 	take_input(&data, argv);
-
-//  	ft_gui_init(&data);
-// 	ft_printf("ok\n");
-// 	ft_draw_grid(&data);
-// 	mlx_mouse_hook(data.window, ft_input, &data);
-// 	mlx_hook(data.window, 17, 0, ft_close, &data);
-// 	mlx_loop(data.mlx);
-
-	// ft_printf("\e[1;1H\e[2J");
-	// ft_draw_start_terminal(&data);
-	// if (get_next_line(0))
-	// 	ft_printf("\e[1;1H\e[2J");
-	// ft_random_start(&data);
-	// if (data.player == 2)
-	// {
-	// 	data.matrix[data.height - 1][data.width / 2] = 2;
-	// }
-	// while (1)
-	// {
-	// 	ft_draw_grid_terminal(&data);
-	// 	ft_printf("Insert n of column: ");
-	// 	input = get_next_line(0);
-	// 	if (ft_check_input_string(input))
-	// 	{
-	// 		column = ft_atoi(input);
-	// 		ft_printf("\e[1;1H\e[2J");
-	// 		ft_put(&data, column - 1);
-	// 		ai_plays(data, data.player);
-	// 	}
-	// 	else
-	// 	{
-	// 		ft_printf("\e[1;1H\e[2J");
-	// 		ft_printf("Invalid number, retry\n");
-	// 	}
-	// }
-// ---------
 	take_input(&data, argv, argc);
 	if (data.gui > 0)
 	{
@@ -67,6 +29,12 @@ int	main(int argc, char **argv)
 		{
 			data.matrix[data.height - 1][data.width / 2] = 2;
 		}
+		brain.matrix = dup_matrix(data);
+		brain.move = data.width / 2;
+		brain.score = 0;
+		brain.id = 0;
+		brain.next = NULL;
+		data.remember = &brain;
 		ft_gui_init(&data);
 	    ft_draw_grid(&data);
 		mlx_mouse_hook(data.window, ft_input, &data);
@@ -100,7 +68,22 @@ int	main(int argc, char **argv)
 				column = ft_atoi(input);
 				ft_printf("\e[1;1H\e[2J");
 				if (ft_put(&data, column - 1))
-					ai_plays(data, data.player, brain);
+				{
+					if(check_win(data, column, 1) == 1)
+					{
+						ft_draw_grid_terminal(&data);
+						ft_printf("hai vinto!\n");
+						return (0);
+					}
+					int ai_move = ai_plays(data, data.player, brain);
+					ft_printf("ai_move: %d\n", ai_move);
+					if(check_win(data, ai_move, 2) == 2)
+					{
+						ft_draw_grid_terminal(&data);
+						ft_printf("hai perso!\n");
+						return (0);
+					}
+				}
 			}
 			else
 			{

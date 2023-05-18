@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:40:34 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 15:24:30 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:32:03 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int    ft_gui_init(t_program *prog)
     prog->empthy = load_sprite(*prog, "sprite/Bg64x64.xpm");
     prog->cpu = load_sprite(*prog, "sprite/Yellow+Bg64x64.xpm");
     prog->fiche = load_sprite(*prog, "sprite/RedOnly.xpm");
+    prog->player_win = load_sprite(*prog, "sprite/RedWin64x64.xpm");
+    prog->cpu_win = load_sprite(*prog, "sprite/YellowWin64x64.xpm");
     // ft_draw(prog);
     // mlx_put_image_to_window(prog->mlx, prog->window, prog->buffer.reference, 0, 0);
     return 0;

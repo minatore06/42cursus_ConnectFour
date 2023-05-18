@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:09:36 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 15:20:01 by javellis         ###   ########.fr       */
+/*   Updated: 2023/05/17 17:31:56 by kristori         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void    ft_draw_grid(t_program *prog)
                 mlx_put_image_to_window(prog->mlx, prog->window, prog->player_img.reference, j * 64, (i+1) *64);
             else if(prog->matrix[i][j] == 2)
                 mlx_put_image_to_window(prog->mlx, prog->window, prog->cpu.reference, j * 64, (i+1) *64);
+            else if(prog->matrix[i][j] == 3)
+                mlx_put_image_to_window(prog->mlx, prog->window, prog->player_win.reference, j * 64, (i+1) *64);
+            else if(prog->matrix[i][j] == 4)
+                mlx_put_image_to_window(prog->mlx, prog->window, prog->cpu_win.reference, j * 64, (i+1) *64);
         }
     }
 }
