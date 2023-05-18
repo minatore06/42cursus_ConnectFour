@@ -92,6 +92,7 @@ void    ft_draw_grid(t_program *prog);
 
 int	        ft_random_start(t_program *prog);
 int 		**dup_matrix(t_program p);
+void	    free_matrix(int **mat);
 void		add_brain_front(t_remember **lst, t_remember *new, int height);
 t_remember	*make_brain(t_program p, int m, int score, int lastID);
 int 		already_explored(t_remember *brain, t_program p, int *score, int *move);

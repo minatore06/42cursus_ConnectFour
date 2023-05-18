@@ -26,12 +26,16 @@ int ft_input(int button, int x, int y, t_program *param)
             ft_draw_grid_terminal(prog);
             if(check_win(*prog, x / 64, 1) == 1)
             {
+                ft_printf("\e[1;1H\e[2J");
+                ft_draw_grid_terminal(prog);
                 ft_printf("hai vinto!\n");
                 return (0);
             }
             int ai_move = ai_plays(*prog, prog->player, *(prog->remember));
             if(check_win(*prog, ai_move, 2) == 2)
             {
+                ft_printf("\e[1;1H\e[2J");
+                ft_draw_grid_terminal(prog);
                 ft_printf("hai perso!\n");
                 return (0);
             }

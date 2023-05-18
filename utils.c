@@ -97,6 +97,21 @@ int **dup_matrix(t_program p)
 	return (maty);
 }
 
+void	free_matrix(int **mat)
+{
+    int     i;
+
+    if (!mat)
+        return ;
+    i = 0;
+    while(mat[i])
+    {
+		free(mat[i]);
+        i++;
+    }
+	free(mat);
+}
+
 t_remember  *last_brain(t_remember *lst)
 {
     if (!lst)

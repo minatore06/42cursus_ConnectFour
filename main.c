@@ -69,7 +69,7 @@ int	main(int argc, char **argv)
 				ft_printf("\e[1;1H\e[2J");
 				if (ft_put(&data, column - 1))
 				{
-					if(check_win(data, column, 1) == 1)
+					if(check_win(data, column - 1, 1) == 1)
 					{
 						ft_draw_grid_terminal(&data);
 						ft_printf("hai vinto!\n");
