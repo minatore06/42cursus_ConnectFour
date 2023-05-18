@@ -25,9 +25,11 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 	int	max, min;
 	int	score;
 	int	tmp;
+	int	count_moves;
 	int order[p.width];
 	t_program p2;
 
+	count_moves = 0;
 	if (played_moves(p) == p.height * p.width)
 		return (0);
 	for(int i = 0; i < p.width; i++)
@@ -37,8 +39,9 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 		if (is_playable(p, m) && check_win_ai(p, m, player, 0) > 0)
 		{
 			*move = m;
-			//ft_printf("Qualcuno vincera'%d | %d\n",(p.width * p.height + 1 - played_moves(p)) / 2, m);
-			return ((p.width * p.height + 1 - played_moves(p)) / 2 );
+/* 			if (depth == 0)
+				ft_printf("Vinco %d | %d\n",(p.width * p.height + 1 - played_moves(p)) / 2, m); */
+			return ((p.width * p.height + 1 - played_moves(p)) / 2);
 		}
 	}
 	for (int m = 0; m < p.width; m++)
@@ -46,8 +49,9 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 		if (is_playable(p, m) && check_win_ai(p, m, change_player(player), 0) > 0)
 		{
 			*move = m;
-			//ft_printf("Qualcun altro vincera'%d | %d\n",(p.width * p.height + 1 - played_moves(p)) / 2, m);
-			return ((p.width * p.height + 1 - played_moves(p)) / 2 );
+/* 			if (depth == 0)
+				ft_printf("Vince %d | %d\n",(p.width * p.height + 1 - played_moves(p)) / 2, m); */
+			return ((p.width * p.height + 1 - played_moves(p)) / 2);
 		}
 	}
  	for (int m = 0; m < p.width; m++)
@@ -56,26 +60,23 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 		{
 			max = get_height(p, order[m]);
 			p.matrix[max][order[m]] = player;
-/* 			for (int i = 0; i < p.height; i++)
-			{
-				ft_printf("cacca");
-				for (int j = 0; j < p.width; j++)
-				{
-					ft_printf("%d", p.matrix[i][j]);
-				}
-				ft_printf("\n");
-			}
-			exit(3); */
 			tmp = order[m];
 			if (is_playable(p, order[m]) && check_win_ai(p, order[m], change_player(player), 0) > 0)
 			{
-				//ft_printf("Non giocare questo %d\n",order[m]);
+/* 				if (depth == 0)
+					ft_printf("Non giocare questo %d\n",order[m]); */
 				order[m] = -1;
 			}
 			p.matrix[max][tmp] = 0;
 		}
 	}
-	if (depth > 12)
+	tmp = destroy_enemy(p, player);
+	if (tmp >= 0)
+	{
+		*move = tmp;
+		return ((p.width * p.height + 1 - played_moves(p)) / 2);
+	}
+	if ((p.width > 30 && depth > 3) || depth > 12 - (p.width - 7) / 4)
 		return (0);
 	min = -(p.width * p.height - 1 - played_moves(p)) / 2;
 	if (alpha < min)
@@ -106,27 +107,30 @@ int	get_best_score(t_program p, int player, int *move, int alpha, int beta, int 
 			p2.matrix[get_height(p2, order[i])][order[i]] = player;
 			player = change_player(player);
 			score = -get_best_score(p2, player, &tmp, -beta, -alpha, depth + 1, brain);
+/* 			if (depth == 0)
+				ft_printf("mov %d, is? %d, how much? %d, beta %d, alpha %d\n", order[i], is_playable(p, order[i]), score, beta, alpha); */
 			//ft_printf("Calcolo incredibile%d\n",score);
 			if (score >= beta)
 			{
-				*move = i;
+/* 				if (depth == 0)
+					ft_printf("aspettative incredibili\n"); */
+				*move = order[i];
 				return (score);
 			}
 			if (score > alpha)
 			{
-				*move = i;
+				count_moves++;
+/* 				if (depth == 0)
+					ft_printf("cisti\n"); */
+				*move = order[i];
 				alpha = score;
 			}
-/* 			if (score > bestScore)
-			{
-				//ft_printf("Cambiamento nell'universo%d | %d\n",score, i);
-				*move = i;
-				bestScore = score;
-			} */
 			p_free(p2);
 			player = change_player(player);
 		}
 	}
+	if (!count_moves)
+		*move = only_playable(p);
 	add_brain_front(&brain, make_brain(p, *move, alpha, brain->id), p.height);
 	return (alpha);
 }
@@ -135,34 +139,37 @@ int	epic_solver(t_program p, int player, t_remember brain)
 {
 	int			min, max;
 	int			med;
-	int			bestScore;
 	int			score;
 	int			move;
+	int			move_emergency;
 	int			tmp;
 
 	move = -1;
 	min = -(p.width * p.height - played_moves(p)) / 2;
 	max = (p.width * p.height + 1 - played_moves(p)) / 2;
-	bestScore = min;
 	while (min < max)
 	{
 		med = min + (max - min) / 2;
+/* 		ft_printf("max %d, min %d, med %d\n", max, min, med); */
 		if (med <= 0 && min / 2 < med)
 			med = min / 2;
 		else if (med >= 0 && max / 2 > med)
 			med = max / 2;
     	score = get_best_score(p, player, &tmp, med, med + 1, 0, &brain);
-		ft_printf("score %d, move %d\n", score, tmp);
-		if (score > bestScore)
-		{
-			bestScore = score;
-			move = tmp;
-		}
+/* 		ft_printf("score %d, move %d\n", score, tmp); */
 		if (score <= med)
+		{
+			move_emergency = tmp;
 			max = score;
+		}
 		else
+		{
+			move = tmp;
 			min = score;
+		}
 	}
+	if (move < 0)
+		return (move_emergency);
 	return (move);
 }
 

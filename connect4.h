@@ -101,6 +101,7 @@ int 		already_explored(t_remember *brain, t_program p, int *score, int *move);
 int 		mat_cmp(t_program p, int **maty);
 int			destroy_enemy(t_program p, int player);
 int			change_player(int player);
+int	        only_playable(t_program p);
 
 int         ai_plays(t_program p, int player, t_remember brain);
 

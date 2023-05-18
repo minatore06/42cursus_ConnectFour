@@ -20,7 +20,7 @@ int get_height(t_program p, int m)
 		return (-1);
     for (i = 1; i < p.height; i++)
     {
-        if (p.matrix[i][m] != 0)
+        if (p.matrix[i][m])
             break ;
     }
 	if (!p.matrix[i - 1][m])
@@ -33,9 +33,19 @@ int	is_playable(t_program p, int m)
 	int	i;
 
 	i = get_height(p, m);
-	if (i >= 0 && !p.matrix[i][m])
+	if (i >= 0)
 		return (1);
 	return (0);
+}
+
+int	only_playable(t_program p)
+{
+	for (int i = 0; i < p.width; i++)
+	{
+		if (!p.matrix[0][i])
+			return (i);
+	}
+	return (-1);
 }
 
 int	played_moves(t_program p)
@@ -93,22 +103,25 @@ int	destroy_enemy(t_program p, int player)
 {
 	int	count;
 
-	count = 0;
-	for (int i = 0; i < p.width; i++)
+	for (int j = p.height - 1; j >= 0; j--)
 	{
-		if (p.matrix[p.height - 1][i] == change_player(player))
-			count++;
-	}
-	if (count > 1)
-	{
+		count = 0;
 		for (int i = 0; i < p.width; i++)
 		{
-			if (p.matrix[p.height - 1][i] == change_player(player))
+			if (p.matrix[j][i] == change_player(player))
+				count++;
+		}
+		if (count > 1)
+		{
+			for (int i = 0; i < p.width; i++)
 			{
-				if (i - 1 >= 0 && !p.matrix[p.height - 1][i - 1])
-					return (i - 1);
-				if (i + 1 < p.width && !p.matrix[p.height - 1][i + 1])
-					return (i + 1);
+				if (p.matrix[j][i] == change_player(player))
+				{
+					if (i - 1 >= 0 && get_height(p, i) == j)
+						return (i - 1);
+					if (i + 1 < p.width && get_height(p, i) == j)
+						return (i + 1);
+				}
 			}
 		}
 	}
