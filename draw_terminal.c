@@ -89,6 +89,19 @@ void	ft_draw_win_terminal(void)
 	ft_printf("\n");
 };
 
+void	ft_draw_draw_terminal(void)
+{
+	ft_printf("\n");
+	ft_printf("\033[1;33m");
+	ft_printf("██████  ██████   █████  ██     ██\n"
+			  "██   ██ ██   ██ ██   ██ ██     ██\n"
+			  "██   ██ ██████  ███████ ██  █  ██\n"
+			  "██   ██ ██   ██ ██   ██ ██ ███ ██\n"
+			  "██████  ██   ██ ██   ██  ███ ███ \n");
+	ft_printf("\033[0m");
+	ft_printf("\n");
+}
+
 void	ft_draw_lose_terminal(void)
 {
 	ft_printf("\n");

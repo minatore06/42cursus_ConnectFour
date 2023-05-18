@@ -32,6 +32,13 @@ int ft_input(int button, int x, int y, t_program *param)
                 ft_draw_win_terminal();
                 return (0);
             }
+            if(check_draw(*prog, x / 64, 1))
+            {
+                ft_draw_grid_terminal(prog);
+                ft_draw_draw_terminal();
+                return (0);
+            }
+            prog->turn++;
             int ai_move = ai_plays(*prog, prog->player, *(prog->remember));
 			ft_printf("\e[1;1H\e[2J");
             ft_draw_grid_terminal(prog);
@@ -40,6 +47,12 @@ int ft_input(int button, int x, int y, t_program *param)
                 ft_printf("\e[1;1H\e[2J");
                 ft_draw_grid_terminal(prog);
                 ft_draw_lose_terminal();
+                return (0);
+            }
+            if(check_draw(*prog, ai_move, 2))
+            {
+                ft_draw_grid_terminal(prog);
+                ft_draw_draw_terminal();
                 return (0);
             }
             prog->turn++;

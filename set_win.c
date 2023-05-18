@@ -107,3 +107,23 @@ void set_diag2(t_program p, int pl, int x, int y)
         j--;
     }
 }
+
+int     check_draw(t_program p, int m, int pl)
+{
+    int i;
+    int j;
+    int z;
+
+    j = 1;
+    i = 0;
+    z = pl;
+    while(i < p.width)
+    {
+        if(p.matrix[0][i] == 0)
+            j = 0;
+        i++;
+    }
+    if(j && !check_win(p, m, z))
+        return(1);
+    return(0);
+}

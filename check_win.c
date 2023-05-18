@@ -130,8 +130,8 @@ int check_win(t_program p, int m, int pl)
     int     y;
     int     z;
 
-    // if (p.turn < 7)
-    //     return (0);
+    if (p.turn < 7)
+        return (0);
     x = 0;
     y = m;
     while(x < p.height)
@@ -171,8 +171,8 @@ int check_win_ai(t_program p, int m, int pl, int verbose)
     int     x;
     int     y;
 
-    // if (p.turn < 7)
-    //     return (0);
+    if (p.turn < 7 && verbose)
+        return (0);
     x = 0;
     y = m;
     if (p.matrix[0][y] != 0)
@@ -185,20 +185,6 @@ int check_win_ai(t_program p, int m, int pl, int verbose)
     }
     x--;
     if (check_row(p, pl, x, y) || check_column(p, pl, x, y) || check_diagonal1(p, pl, x, y) || check_diagonal2(p, pl, x, y))
-    {
-        if (verbose)
-        {
-            ft_printf("la mossa %d vince player %d\n", m, pl);
-            for (int i = 0; i < p.height; i++)
-			{
-				for (int j = 0; j < p.width; j++)
-				{
-					ft_printf("%3d", p.matrix[i][j]);
-				}
-				ft_printf("\n");
-			}
-		}
         return(1);
-    }
     return (0);
 }
