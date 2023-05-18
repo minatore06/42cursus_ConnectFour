@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kristori <kristori@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javellis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 12:40:34 by javellis          #+#    #+#             */
-/*   Updated: 2023/05/17 17:32:03 by kristori         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:38:57 by javellis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ t_image	ft_new_image(void *mlx, int width, int height)
 
 int    ft_gui_init(t_program *prog)
 {
+	prog->win = 0;
     prog->mlx = mlx_init();
-	prog->window = mlx_new_window(prog->mlx, prog->width * 64, (prog->height + 1) *  64, "Connect4");
+	prog->window = mlx_new_window(prog->mlx, prog->width * 64, ((prog->height + 1) *  64) + 20, "Connect4");
     prog->buffer = ft_new_image(prog->mlx, prog->width * 64, (prog->height) * 64);
     prog->player_img = load_sprite(*prog, "sprite/Red+Bg64x64.xpm");
     prog->empthy = load_sprite(*prog, "sprite/Bg64x64.xpm");

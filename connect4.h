@@ -6,7 +6,7 @@
 /*   By: ncortigi <ncortigi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 15:36:48 by ncortigi          #+#    #+#             */
-/*   Updated: 2023/05/18 15:51:16 by ncortigi         ###   ########.fr       */
+/*   Updated: 2023/05/18 16:08:14 by ncortigi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
 void		ft_draw_win_terminal(void);
 void		ft_draw_lose_terminal(void);
+void    	ft_draw_draw_terminal(void);
 int			check_input(int ac, char **av);
 void	    take_input(t_program *data, char **av, int ac);
 int	        ft_put(t_program *prog, int column);
@@ -101,6 +102,7 @@ int 		already_explored(t_remember *brain, t_program p, int *score, int *move);
 int 		mat_cmp(t_program p, int **maty);
 int			destroy_enemy(t_program p, int player);
 int			change_player(int player);
+int	        only_playable(t_program p);
 
 int         ai_plays(t_program p, int player, t_remember brain);
 
@@ -111,7 +113,9 @@ void        set_diag2(t_program p, int pl, int x, int y);
 
 int			check_win(t_program p, int m, int pl);
 int         check_win_ai(t_program p, int m, int pl, int verbose);
+int         check_draw(t_program p, int m, int pl);
 
 int         ft_mouse_move(int x, int y, void *param);
+int         ft_esc(int keycode, void *param);
 
 #endif
