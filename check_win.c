@@ -140,7 +140,7 @@ int check_win(t_program p, int m, int pl)
             break;
         x++;
     }
-    if (x != 0 && p.matrix[x - 1][y] != 0 || x == p.height)
+    if ((x != 0 && p.matrix[x - 1][y] != 0) || x == p.height)
         return (-1);
     z = 0;
     if (check_row(p, pl, x, y))
@@ -166,11 +166,10 @@ int check_win(t_program p, int m, int pl)
     return (z);
 }
 
-int check_win_ai(t_program p, int m, int pl, int **mat)
+int check_win_ai(t_program p, int m, int pl, int verbose)
 {
     int     x;
     int     y;
-    int     **temp;
 
     // if (p.turn < 7)
     //     return (0);
@@ -178,8 +177,6 @@ int check_win_ai(t_program p, int m, int pl, int **mat)
     y = m;
     if (p.matrix[0][y] != 0)
         return (-1);
-    temp = dup_matrix(p);
-    p.matrix = mat;
     while(x < p.height)
     {
         if(p.matrix[x][y] != 0)
@@ -189,11 +186,19 @@ int check_win_ai(t_program p, int m, int pl, int **mat)
     x--;
     if (check_row(p, pl, x, y) || check_column(p, pl, x, y) || check_diagonal1(p, pl, x, y) || check_diagonal2(p, pl, x, y))
     {
-        free_matrix(p.matrix);
-        p.matrix = temp;
+        if (verbose)
+        {
+            ft_printf("la mossa %d vince player %d\n", m, pl);
+            for (int i = 0; i < p.height; i++)
+			{
+				for (int j = 0; j < p.width; j++)
+				{
+					ft_printf("%3d", p.matrix[i][j]);
+				}
+				ft_printf("\n");
+			}
+		}
         return(1);
     }
-    free_matrix(p.matrix);
-    p.matrix = temp;
     return (0);
 }

@@ -19,7 +19,7 @@ LIBFT = libft
 LIBFTNAME = libft.a
 
 %.o: %.c
-	${CC} ${FLAGS} -g -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
 	make bonus -C ${LIBFT}
@@ -32,7 +32,7 @@ all: ${NAME}
 bonus:	${OBJS}
 	make bonus -C ${LIBFT}
 	mv ${LIBFT}/${LIBFTNAME} ${NAME}
-	${CC} ${FLAGS} ${OBJS} ${NAME} -o ${OUT}
+	${CC} ${CFLAGS} ${OBJS} ${NAME} -o ${OUT}
 
 clean:
 	${RM} ${OBJS}

@@ -16,11 +16,15 @@ int get_height(t_program p, int m)
 {
     int i;
 
-    for (i = p.height - 1; i >= 0; i--)
+	if (p.matrix[0][m])
+		return (-1);
+    for (i = 1; i < p.height; i++)
     {
-        if (p.matrix[i][m] == 0)
-            return (i);
+        if (p.matrix[i][m] != 0)
+            break ;
     }
+	if (!p.matrix[i - 1][m])
+		return (i - 1);
     return (-1);
 }
 
@@ -74,7 +78,6 @@ int	check_one_dir(t_program p, int m, int player, int mod_i, int mod_j)
 int is_winning_move(t_program p, int m, int player)
 {
     int i, j;
-	int	is_win;
 
     i = get_height(p, m);
     j = m;
@@ -84,4 +87,30 @@ int is_winning_move(t_program p, int m, int player)
 		check_one_dir(p, m, player, 1, 1) + check_one_dir(p, m, player, -1, -1) >= 4)
 		return (1);
     return (0);
+}
+
+int	destroy_enemy(t_program p, int player)
+{
+	int	count;
+
+	count = 0;
+	for (int i = 0; i < p.width; i++)
+	{
+		if (p.matrix[p.height - 1][i] == change_player(player))
+			count++;
+	}
+	if (count > 1)
+	{
+		for (int i = 0; i < p.width; i++)
+		{
+			if (p.matrix[p.height - 1][i] == change_player(player))
+			{
+				if (i - 1 >= 0 && !p.matrix[p.height - 1][i - 1])
+					return (i - 1);
+				if (i + 1 < p.width && !p.matrix[p.height - 1][i + 1])
+					return (i + 1);
+			}
+		}
+	}
+	return (-1);
 }

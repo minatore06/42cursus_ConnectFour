@@ -15,6 +15,7 @@
 
 int ft_input(int button, int x, int y, t_program *param)
 {
+    (void)y;
     if (button == 1)
     {
         t_program *prog = (t_program *)param;
@@ -49,6 +50,7 @@ int ft_input(int button, int x, int y, t_program *param)
 
 int ft_mouse_move(int x, int y, void *param)
 {
+    (void)y;
     t_program *prog = (t_program *)param;
     mlx_clear_window(prog->mlx, prog->window);
     ft_draw_grid(prog);

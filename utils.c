@@ -134,8 +134,10 @@ void    free_cell(t_remember *cell, int height)
 void	add_brain_front(t_remember **lst, t_remember *new, int height)
 {
     if (new->id > 300000)
+    {
         free_cell(last_brain(*lst), height);
-	new->next = *lst;
+    }
+    new->next = *lst;
 	*lst = new;
 }
 
@@ -181,4 +183,13 @@ int already_explored(t_remember *brain, t_program p, int *score, int *move)
         brain = brain->next;
     }
     return (0);
+}
+
+int	change_player(int player)
+{
+	if (player == 1)
+		return (2);
+	else if (player == 2)
+		return (1);
+	return (42);
 }
