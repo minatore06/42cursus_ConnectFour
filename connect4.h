@@ -70,6 +70,7 @@ void	    ft_draw_start_terminal(t_program *prog);
 void	    ft_draw_grid_terminal(t_program *prog);
 void		ft_draw_win_terminal(void);
 void		ft_draw_lose_terminal(void);
+void    	ft_draw_draw_terminal(void);
 int			check_input(int ac, char **av);
 void	    take_input(t_program *data, char **av, int ac);
 int	        ft_put(t_program *prog, int column);
@@ -112,6 +113,7 @@ void        set_diag2(t_program p, int pl, int x, int y);
 
 int			check_win(t_program p, int m, int pl);
 int         check_win_ai(t_program p, int m, int pl, int verbose);
+int         check_draw(t_program p, int m, int pl);
 
 int         ft_mouse_move(int x, int y, void *param);
 
